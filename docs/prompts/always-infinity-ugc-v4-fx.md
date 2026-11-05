@@ -63,7 +63,7 @@ STEP 3 — CAMERA MOVES with add_video_keyframe on track "main" (batch mode; tim
    c. Selfie push-in (segment 7): property_types ["uniform_scale","uniform_scale"], times [10.2, 12.1], values ["1.0","1.1"]
    d. Dance beat punches (segment 10): property_types all "uniform_scale", times [18.7, 18.85, 19.05, 19.4, 19.6], values ["1.0","1.1","1.0","1.1","1.0"]
 
-STEP 4 — EFFECTS with add_effect. Every effect goes on its OWN track (fx_01 ... fx_16) so they can overlap.
+STEP 4 — EFFECTS with add_effect. Every effect goes on its OWN track (fx_01 ... fx_17) so they can overlap.
    Scene effects (effect_category "scene"):
    1.  "Glowburst"       0.00-0.50   fx_01   hook burst on the first frame
    2.  "Gold_Sparkles"   0.00-1.60   fx_02   premium sparkle on the boxes
