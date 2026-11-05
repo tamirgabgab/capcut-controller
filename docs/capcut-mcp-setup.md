@@ -55,15 +55,40 @@ This guide uses **VectCutAPI's built-in MCP server** — fewest moving parts.
 
 ## 4. Install VectCutAPI
 
+### macOS / Linux (Terminal)
+
 ```bash
 git clone https://github.com/sun-guannan/VectCutAPI.git
 cd VectCutAPI
 python3 -m venv venv-capcut
-source venv-capcut/bin/activate        # Windows: venv-capcut\Scripts\activate
+source venv-capcut/bin/activate
 pip install -r requirements.txt
 pip install -r requirements-mcp.txt
-cp config.json.example config.json     # Windows: copy config.json.example config.json
+cp config.json.example config.json
 ```
+
+### Windows (Command Prompt / cmd)
+
+`source` and `cp` do not exist in cmd. On Windows, `python3` is often a Microsoft
+Store alias that silently does nothing, so use the `py` launcher:
+
+```bat
+git clone https://github.com/sun-guannan/VectCutAPI.git
+cd VectCutAPI
+py -0
+py -3 -m venv venv-capcut
+venv-capcut\Scripts\activate
+python --version
+pip install -r requirements.txt
+pip install -r requirements-mcp.txt
+copy config.json.example config.json
+```
+
+- `py -0` lists installed Pythons; you need 3.10 or newer. If `py` is missing,
+  install Python from python.org and tick **"Add python.exe to PATH"**.
+- After `activate`, the prompt starts with `(venv-capcut)`.
+- PowerShell instead of cmd: activate with `venv-capcut\Scripts\Activate.ps1`. If
+  scripts are blocked, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once.
 
 ### `config.json`
 
@@ -105,12 +130,10 @@ claude mcp add --scope user capcut \
   -- /ABS/PATH/VectCutAPI/venv-capcut/bin/python /ABS/PATH/VectCutAPI/mcp_server.py
 ```
 
-Windows (PowerShell):
+Windows (cmd or PowerShell, one line; example clone at `C:\Users\User\VectCutAPI`):
 
-```powershell
-claude mcp add --scope user capcut `
-  --env PYTHONPATH=C:\ABS\PATH\VectCutAPI `
-  -- C:\ABS\PATH\VectCutAPI\venv-capcut\Scripts\python.exe C:\ABS\PATH\VectCutAPI\mcp_server.py
+```bat
+claude mcp add --scope user capcut --env PYTHONPATH=C:\Users\User\VectCutAPI -- C:\Users\User\VectCutAPI\venv-capcut\Scripts\python.exe C:\Users\User\VectCutAPI\mcp_server.py
 ```
 
 Verify:
