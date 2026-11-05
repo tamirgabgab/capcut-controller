@@ -14,3 +14,4 @@ Config templates:
 ## Prompts
 
 - [docs/prompts/always-infinity-ugc-v2.md](docs/prompts/always-infinity-ugc-v2.md) — enhancement prompt for an Always Infinity UGC clip
+- [docs/prompts/always-infinity-ugc-v3.md](docs/prompts/always-infinity-ugc-v3.md) — v3 with 8 segments, transitions on every cut and scene effects
