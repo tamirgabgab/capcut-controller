@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "capcut": {
+      "command": "C:\\ABS\\PATH\\VectCutAPI\\venv-capcut\\Scripts\\python.exe",
+      "args": ["C:\\ABS\\PATH\\VectCutAPI\\mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "C:\\ABS\\PATH\\VectCutAPI",
+        "DEBUG": "0"
+      }
+    }
+  }
+}
