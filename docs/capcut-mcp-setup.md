@@ -178,10 +178,18 @@ On Windows, `desktop_companion.py` in VectCutAPI can auto-reload CapCut after a 
 
 ## 8. First test prompt
 
+Run it inside Claude Code: open a new cmd window, type `claude`, paste the prompt.
+Approve the `capcut` tool calls when asked.
+
+Media can be a **local file path** (VectCutAPI copies it into the draft) or a
+direct-download URL ending in `.mp4`. Share pages (YouTube, Drive, Instagram) do not
+work. Keep local paths free of spaces and non-Latin characters, e.g.
+`C:\Users\User\Videos\ugc\product.mp4`.
+
 ```
 Use the capcut MCP tools to:
 1. create_draft at 1080x1920 (9:16).
-2. add_video from <URL of a product clip>.
+2. add_video from C:\Users\User\Videos\ugc\product.mp4
 3. add_text "This changed my morning routine" at the top, 0–3s, bold white with shadow.
 4. add_text "Link in bio" at the bottom, last 3 seconds.
 5. save_draft with project_name "ugc-test-01".
@@ -189,6 +197,39 @@ Report the draft_id and where the draft was saved.
 ```
 
 Success = the project opens in CapCut with the clip and both captions.
+
+### Opening the draft
+
+1. Fully close CapCut (including the system tray icon) before the save, then open it.
+2. On the home screen, find `ugc-test-01` under Projects and double-click it.
+3. Export for social: **Export** (top right) → 1080p, 30 fps, MP4.
+
+Status: verified end-to-end on Windows (Nov 2026) — draft auto-deployed to
+`%LOCALAPPDATA%\CapCut\User Data\Projects\com.lveditor.draft\ugc-test-01` and
+opened in CapCut with the video and both texts.
+
+## 8b. Prompting tips (learned from real runs)
+
+- **Coordinates**: `transform_y` is measured in half-canvas heights, positive = up.
+  `0.7` ≈ top area, `0` = center, `-0.55` ≈ lower third (where burned-in captions
+  usually sit), `-0.8` = near the bottom.
+- **Font size**: the MCP schema says default 24, but the underlying code defaults to
+  8. Good starting values: 12 for a hook, 10 for body text, 6 for small print.
+- **Bold**: `add_text` accepts `bold: true` even though the MCP schema does not list it.
+- **Animation / effect names must exist** in VectCutAPI's CapCut metadata, or the
+  call returns "Unsupported ...". Examples that exist:
+  - Text intro: `Pop_Up`, `Bounce_In`, `Slide_Up`, `Typewriter`, `Fade_In`, `Zoom_In`
+  - Text outro: `Fade_Out`, `Slide_Down`, `Zoom_Out`
+  - Scene effects (`add_effect`): `White_Flash`, `Camera_Shake`, `Mini_Zoom`, `Pulse`, `Vignette`
+  - Transitions (between video segments): `Mix`, `Dissolve`, `White_Flash`, `Pull_in`, `Slide`
+  Tell Claude to skip and report rejected names rather than guess replacements.
+- **Zoom punch-ins**: `add_video_keyframe` with `property_type: uniform_scale` and
+  string values (`"1.15"`), batch mode with `times` / `values`.
+- **Same `project_name` overwrites** the existing CapCut project. Use a new name per version.
+- **Leftover copy**: each save also leaves a `dfd_*` folder in the VectCutAPI
+  directory. CapCut does not need it once the project opens with its media.
+
+Ready-made example: [`docs/prompts/always-infinity-ugc-v2.md`](prompts/always-infinity-ugc-v2.md).
 
 ## 9. Troubleshooting
 

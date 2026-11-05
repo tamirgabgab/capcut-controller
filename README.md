@@ -10,3 +10,7 @@ Config templates:
 
 - [mcp/.mcp.example.json](mcp/.mcp.example.json) — Claude Code, project scope (copy to `.mcp.json`)
 - [mcp/claude_desktop_config.example.json](mcp/claude_desktop_config.example.json) — Claude Desktop (Windows paths)
+
+## Prompts
+
+- [docs/prompts/always-infinity-ugc-v2.md](docs/prompts/always-infinity-ugc-v2.md) — enhancement prompt for an Always Infinity UGC clip
